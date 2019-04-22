@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Tiger2β Geo</string>
+    <string name="activity_label">Tiger2β GeofenceService</string>
+    <string name="top_label">利用許諾</string>
+    <string name="top_image_text">画像の読み込みが上手くいきませんでした。</string>
+    <string name="top_text">虎の穴課題その②β「GeoService」では、位置情報の取得を行います。</string>
+    <string name="top_text_description">ver.βでぐるなびAPIを利用したラーメン情報の取得に対応しました。</string>>
+    <string name="top_button">同意してアプリを使う</string>
+
+    //NavigationItem
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">虎の穴 課題②β 「GeoService」</string>
+    <string name="nav_header_subtitle">mail.address@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="topText">計測した位置情報をこちらに表示します。</string>
+    <string name="geofence_title">ラーメンGeofenceを使う</string>
+    <string name="geofence_text">Geofence（ジオフェンス）とは仮想的な地理的境界線のことで、プライバシーの境界線を設定することができる機能です。\n登録したGeofence内への入場・退場を検知します。\n以下のスイッチからON/OFFを切り替えられます。\n※ON状態時はアプリ起動時に周囲のラーメン屋を取得します。</string>
+    <string name="geofence_list">現在使用可能なGeofence一覧はGeofenceListより確認できます。</string>
+    <string name="sorry_text_title">登録しているGeofence情報がありません。</string>
+    <string name="sorry_text_description">ご登録後に再度ご確認ください。</string>
+</resources>
