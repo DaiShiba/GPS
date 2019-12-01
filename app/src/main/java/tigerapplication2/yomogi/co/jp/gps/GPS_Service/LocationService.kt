@@ -10,6 +10,9 @@ import android.support.annotation.RequiresApi
 import android.support.v4.app.NotificationManagerCompat
 import android.util.Log
 import com.google.android.gms.location.LocationResult
+import tigerapplication2.yomogi.co.jp.gps.Activity_Fragment.LocationInfoFragment
+import tigerapplication2.yomogi.co.jp.gps.Activity_Fragment.LocationInfoListFragment
+import tigerapplication2.yomogi.co.jp.gps.Contents.LocationContent
 import tigerapplication2.yomogi.co.jp.gps.GPS_Service.FLPLocationManager.OnLocationResultListener
 import tigerapplication2.yomogi.co.jp.gps.Notification.MyNotificationCreater
 import java.text.SimpleDateFormat
@@ -40,6 +43,11 @@ class LocationService : Service() , OnLocationResultListener {
             // notificationId is a unique int for each notification that you must define
             notify(3, notification)
         }
+
+        val locationItem = LocationContent.LocationItem("0",fmt.format(Date(lastDate)), lastLatitude.toString(), lastLongitude.toString(), lastAltitude.toString())
+        LocationContent.addItem(locationItem)
+        LocationInfoFragment.oreoreNotify()
+
     }
 
     companion object {

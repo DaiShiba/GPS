@@ -14,7 +14,7 @@ import static tigerapplication2.yomogi.co.jp.gps.Database.DatabaseDefineEnum.*;
  */
 public class LocationContent {
 
-    public static List<LocationItem> ITEMS = new ArrayList<LocationItem>();
+    private static List<LocationItem> ITEMS = new ArrayList<LocationItem>();
     private static int id = 1;
 
     //Cursorを引数にLocationInfoリストを生成
@@ -41,8 +41,8 @@ public class LocationContent {
     }
 
     /**リストに追加*/
-    private static void addItem(LocationItem item) {
-        ITEMS.add(item);
+    public static void addItem(LocationItem item) {
+        ITEMS.add(0, item);
     }
 
     /**リストを返却*/
@@ -57,7 +57,7 @@ public class LocationContent {
         public final String altitude;
 
         //LocationItemコンストラクタ
-        private LocationItem(String id, String time, String latitude , String longitude , String altitude) {
+        public LocationItem(String id, String time, String latitude , String longitude , String altitude) {
             this.id = id;
             this.time = time;
             this.latitude = latitude;

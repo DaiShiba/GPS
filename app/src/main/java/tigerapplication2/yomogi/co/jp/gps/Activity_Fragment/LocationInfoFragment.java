@@ -32,6 +32,8 @@ public class LocationInfoFragment extends Fragment {
     private static String data_count;
     private static int count;
 
+    private static RecyclerView.Adapter recycleAdapter;
+
     public LocationInfoFragment() {
     }
 
@@ -78,9 +80,17 @@ public class LocationInfoFragment extends Fragment {
             recyclerView.addItemDecoration(itemDecoration);
 
             //アダプタにリストとリスナーを設定
-            recyclerView.setAdapter(new MyLocationInfoRecyclerViewAdapter(locationContent.getItems(), mListener));
+            recycleAdapter = new MyLocationInfoRecyclerViewAdapter(locationContent.getItems(), mListener);
+            recyclerView.setAdapter(recycleAdapter);
         }
         return view;
+    }
+
+    public static void oreoreNotify() {
+        Log.e(LOG_TAG,"oreoreNotify Called");
+        if (recycleAdapter != null) {
+            recycleAdapter.notifyItemInserted(0);
+        }
     }
 
 

@@ -41,13 +41,13 @@ public class MyLocationInfoRecyclerViewAdapter extends RecyclerView.Adapter<MyLo
     //各Viewにテキストを設定
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Log.d(LOG_TAG,"onBindViewHolder Called");
-        Log.d(LOG_TAG,"mValues.get(position)" + mValues.get(position));
-        Log.d(LOG_TAG,"mValues.get(position).id" + mValues.get(position).id);
-        Log.d(LOG_TAG,"mValues.get(position).time" + mValues.get(position).time);
-        Log.d(LOG_TAG,"mValues.get(position).latitude" + mValues.get(position).latitude);
-        Log.d(LOG_TAG,"mValues.get(position).longitude" + mValues.get(position).longitude);
-        Log.d(LOG_TAG,"mValues.get(position).altitude" + mValues.get(position).altitude);
+//        Log.d(LOG_TAG,"onBindViewHolder Called");
+//        Log.d(LOG_TAG,"mValues.get(position)" + mValues.get(position));
+//        Log.d(LOG_TAG,"mValues.get(position).id" + mValues.get(position).id);
+//        Log.d(LOG_TAG,"mValues.get(position).time" + mValues.get(position).time);
+//        Log.d(LOG_TAG,"mValues.get(position).latitude" + mValues.get(position).latitude);
+//        Log.d(LOG_TAG,"mValues.get(position).longitude" + mValues.get(position).longitude);
+//        Log.d(LOG_TAG,"mValues.get(position).altitude" + mValues.get(position).altitude);
 
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);

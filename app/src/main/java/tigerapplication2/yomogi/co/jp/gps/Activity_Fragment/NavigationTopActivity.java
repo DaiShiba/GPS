@@ -181,12 +181,6 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
 //        Log.d(LOG_TAG,"locationManager.startLocationUpdates(); Called");
 
         Log.d(LOG_TAG, "位置情報検知サービスの開始");
-//        Log.d(LOG_TAG, "LocationIntentService Start");
-//        Intent intent = new Intent(mContext, LocationIntentService.class);
-//        runOnUiThread(() -> {
-//            Log.d(LOG_TAG, "LocationIntentService Start in UiThread");
-//            startService(intent);
-//        });
 
         // Bind to LocalService
         Intent intent = new Intent(this, LocationService.class);
