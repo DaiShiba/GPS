@@ -226,7 +226,7 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
     /**位置情報検知を停止*/
     public void stopLocationUpdate() {
         Log.d(LOG_TAG,"locationManager.stopLocationUpdates() Called");
-        mService.stopForeground(true);
+        mService.stopSelf();
         unbindService(connection);
         mBound = false;
     }
