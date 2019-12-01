@@ -20,4 +20,9 @@
     <string name="geofence_list">現在使用可能なGeofence一覧はGeofenceListより確認できます。</string>
     <string name="sorry_text_title">登録しているGeofence情報がありません。</string>
     <string name="sorry_text_description">ご登録後に再度ご確認ください。</string>
+    <string name="notification_title">位置情報検知タイトル</string>
+    <string name="notification_message">位置情報取得本文</string>
+    <string name="ticker_text">位置情報取得Ticker</string>
+    <string name="channel_name">チャンネル名</string>
+    <string name="channel_description">チャンネル詳細</string>
 </resources>

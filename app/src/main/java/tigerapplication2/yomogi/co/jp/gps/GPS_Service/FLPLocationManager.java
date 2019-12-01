@@ -35,27 +35,27 @@ public class FLPLocationManager extends LocationCallback {
 
     @Override
     public void onLocationResult(LocationResult locationResult) {
-        Log.e(LOG_TAG, "onLocationResult called");
+        Log.i(LOG_TAG, "onLocationResult called");
         super.onLocationResult(locationResult);
-//        mListener.onLocationResult(locationResult);
+        mListener.onLocationResult(locationResult);
 
-        if (locationResult == null) {
-            Log.e(LOG_TAG, "# No location data.");
-            return;
-        }
-
-        // 緯度・経度・高度を取得
-        long lastDate = locationResult.getLastLocation().getTime();
-        double lastLatitude = locationResult.getLastLocation().getLatitude();
-        double lastLongitude = locationResult.getLastLocation().getLongitude();
-        double lastAltitude = locationResult.getLastLocation().getAltitude();
-
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String str = "更新日時" + fmt.format(new Date(lastDate)) +
-                "\nLatitude     : N" + String.valueOf(lastLatitude).replace(".","°") +
-                "\nLongitude  : N" + String.valueOf(lastLongitude).replace(".","°") +
-                "\nAltitude      :  " + String.valueOf(lastAltitude);
-        Log.d(LOG_TAG, str);
+//        if (locationResult == null) {
+//            Log.e(LOG_TAG, "# No location data.");
+//            return;
+//        }
+//
+//        // 緯度・経度・高度を取得
+//        long lastDate = locationResult.getLastLocation().getTime();
+//        double lastLatitude = locationResult.getLastLocation().getLatitude();
+//        double lastLongitude = locationResult.getLastLocation().getLongitude();
+//        double lastAltitude = locationResult.getLastLocation().getAltitude();
+//
+//        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String str = "更新日時" + fmt.format(new Date(lastDate)) +
+//                "\nLatitude     : N" + String.valueOf(lastLatitude).replace(".","°") +
+//                "\nLongitude  : N" + String.valueOf(lastLongitude).replace(".","°") +
+//                "\nAltitude      :  " + String.valueOf(lastAltitude);
+//        Log.e(LOG_TAG, str);
     }
 
     public void startLocationUpdates() {
@@ -76,7 +76,7 @@ public class FLPLocationManager extends LocationCallback {
 
         LocationRequest request = new LocationRequest();
         //位置情報取得のインターバルを設定(不安定)
-        request.setInterval(5000);
+        request.setInterval(50000);
         //位置情報取得の最速インターバルを設定(安定)
         //ここで指定した秒数より早く検知しても、本アプリに通知を送らない
         request.setFastestInterval(10000);

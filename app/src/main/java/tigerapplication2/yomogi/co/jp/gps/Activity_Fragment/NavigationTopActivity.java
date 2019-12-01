@@ -1,13 +1,18 @@
 package tigerapplication2.yomogi.co.jp.gps.Activity_Fragment;
 
 import android.app.NotificationManager;
+import android.app.Service;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -36,6 +41,7 @@ import tigerapplication2.yomogi.co.jp.gps.GPS_Service.FLPLocationManager;
 import tigerapplication2.yomogi.co.jp.gps.GPS_Service.GeofenceIntentService;
 import tigerapplication2.yomogi.co.jp.gps.GPS_Service.GeofenceReceiver;
 import tigerapplication2.yomogi.co.jp.gps.GPS_Service.LocationIntentService;
+import tigerapplication2.yomogi.co.jp.gps.GPS_Service.LocationService;
 import tigerapplication2.yomogi.co.jp.gps.Intent.IntentUtility;
 import tigerapplication2.yomogi.co.jp.gps.Preference.LastLocationPreference;
 import tigerapplication2.yomogi.co.jp.gps.Preference.SettingsPreference;
@@ -108,7 +114,7 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
                 if(aBoolean) {
                     startLocationUpdate();
                 }else {
-                    if(locationManager != null)stopLocationUpdate();
+                    stopLocationUpdate();
                 }
             }
         });
@@ -121,18 +127,16 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
 
     }
 
-    /**バックグランド遷移契機で位置情報検知を停止*/
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(LOG_TAG,"onPause Called");
-    }
-
     /**フォアグラウンド遷移契機で位置情報設定値を取得し、開始の是非を判断*/
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(LOG_TAG,"onResume Called");
+
+        if(mBound) {
+            return;
+        }
+
         //位置情報検知をONにしている場合は、位置情報検知を再開
         SharedPreferences sharedPreferences = SettingsPreference.getThisPreference(this);
         if(sharedPreferences.getBoolean(SettingsPreference.LOCATION_ENABLED.name(),false)){
@@ -177,18 +181,52 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
 //        Log.d(LOG_TAG,"locationManager.startLocationUpdates(); Called");
 
         Log.d(LOG_TAG, "位置情報検知サービスの開始");
-        Log.d(LOG_TAG, "LocationIntentService Start");
-        Intent intent = new Intent(mContext, LocationIntentService.class);
-        runOnUiThread(() -> {
-            Log.d(LOG_TAG, "LocationIntentService Start in UiThread");
+//        Log.d(LOG_TAG, "LocationIntentService Start");
+//        Intent intent = new Intent(mContext, LocationIntentService.class);
+//        runOnUiThread(() -> {
+//            Log.d(LOG_TAG, "LocationIntentService Start in UiThread");
+//            startService(intent);
+//        });
+
+        // Bind to LocalService
+        Intent intent = new Intent(this, LocationService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Log.d(LOG_TAG, "LocationService startForeground");
+            startForegroundService(intent);
+        }else {
+            Log.d(LOG_TAG, "LocationService startService");
             startService(intent);
-        });
+        }
+        bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
+
+    LocationService mService;
+    boolean mBound = false;
+
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection connection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName className,
+                                       IBinder service) {
+            Log.d(LOG_TAG, "onServiceConnected Called");
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            LocationService.LocalBinder binder = (LocationService.LocalBinder) service;
+            mService = binder.getService();
+            mBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            Log.d(LOG_TAG, "onServiceDisconnected Called");
+            mBound = false;
+        }
+    };
 
     /**位置情報検知を停止*/
     public void stopLocationUpdate() {
-        locationManager.stopLocationUpdates();
         Log.d(LOG_TAG,"locationManager.stopLocationUpdates() Called");
+        mService.stopForeground(true);
     }
 
     /**バックキー押下制限 ランチャー画面に遷移*/
