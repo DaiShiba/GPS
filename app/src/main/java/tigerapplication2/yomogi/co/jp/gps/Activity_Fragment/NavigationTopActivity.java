@@ -227,6 +227,8 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
     public void stopLocationUpdate() {
         Log.d(LOG_TAG,"locationManager.stopLocationUpdates() Called");
         mService.stopForeground(true);
+        unbindService(connection);
+        mBound = false;
     }
 
     /**バックキー押下制限 ランチャー画面に遷移*/
