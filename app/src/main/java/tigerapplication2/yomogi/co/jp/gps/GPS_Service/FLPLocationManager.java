@@ -10,6 +10,9 @@ import android.util.Log;
 
 import com.google.android.gms.location.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import tigerapplication2.yomogi.co.jp.gps.Intent.IntentUtility;
 
 /**位置情報検知用クラス
@@ -32,8 +35,27 @@ public class FLPLocationManager extends LocationCallback {
 
     @Override
     public void onLocationResult(LocationResult locationResult) {
+        Log.e(LOG_TAG, "onLocationResult called");
         super.onLocationResult(locationResult);
-        mListener.onLocationResult(locationResult);
+//        mListener.onLocationResult(locationResult);
+
+        if (locationResult == null) {
+            Log.e(LOG_TAG, "# No location data.");
+            return;
+        }
+
+        // 緯度・経度・高度を取得
+        long lastDate = locationResult.getLastLocation().getTime();
+        double lastLatitude = locationResult.getLastLocation().getLatitude();
+        double lastLongitude = locationResult.getLastLocation().getLongitude();
+        double lastAltitude = locationResult.getLastLocation().getAltitude();
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = "更新日時" + fmt.format(new Date(lastDate)) +
+                "\nLatitude     : N" + String.valueOf(lastLatitude).replace(".","°") +
+                "\nLongitude  : N" + String.valueOf(lastLongitude).replace(".","°") +
+                "\nAltitude      :  " + String.valueOf(lastAltitude);
+        Log.d(LOG_TAG, str);
     }
 
     public void startLocationUpdates() {

@@ -13,6 +13,10 @@
         android:roundIcon="@drawable/ic_tiger"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".GPS_Service.LocationIntentService"
+            android:exported="false"></service>
+
         <activity
             android:name=".Activity_Fragment.LicenceActivity"
             android:label="@string/activity_label"
@@ -27,7 +31,7 @@
         <activity
             android:name=".Activity_Fragment.NavigationTopActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name=".GPS_Service.GeofenceReceiver"
@@ -40,7 +44,7 @@
 
         <service
             android:name=".GPS_Service.GeofenceIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
     </application>
 
 </manifest>

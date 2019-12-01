@@ -35,6 +35,7 @@ import tigerapplication2.yomogi.co.jp.gps.Database.RestaurantDatabaseHelper;
 import tigerapplication2.yomogi.co.jp.gps.GPS_Service.FLPLocationManager;
 import tigerapplication2.yomogi.co.jp.gps.GPS_Service.GeofenceIntentService;
 import tigerapplication2.yomogi.co.jp.gps.GPS_Service.GeofenceReceiver;
+import tigerapplication2.yomogi.co.jp.gps.GPS_Service.LocationIntentService;
 import tigerapplication2.yomogi.co.jp.gps.Intent.IntentUtility;
 import tigerapplication2.yomogi.co.jp.gps.Preference.LastLocationPreference;
 import tigerapplication2.yomogi.co.jp.gps.Preference.SettingsPreference;
@@ -112,11 +113,11 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
             }
         });
 
-        //Geofence有効時にサービス開始
-        SharedPreferences sharedPreferences = SettingsPreference.getThisPreference(this);
-        boolean swEnabled = sharedPreferences.getBoolean(SettingsPreference.GEOFENCE_ENABLED.name(),false);
-        Log.d(LOG_TAG,"swEnabled" + swEnabled);
-        if(swEnabled)GeofenceIntentService.startActionGeofence(this,CATEGORY_PARAM);
+//        //Geofence有効時にサービス開始
+//        SharedPreferences sharedPreferences = SettingsPreference.getThisPreference(this);
+//        boolean swEnabled = sharedPreferences.getBoolean(SettingsPreference.GEOFENCE_ENABLED.name(),false);
+//        Log.d(LOG_TAG,"swEnabled" + swEnabled);
+//        if(swEnabled)GeofenceIntentService.startActionGeofence(this,CATEGORY_PARAM);
 
     }
 
@@ -125,7 +126,6 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
     public void onPause() {
         super.onPause();
         Log.d(LOG_TAG,"onPause Called");
-        if(locationManager != null)stopLocationUpdate();
     }
 
     /**フォアグラウンド遷移契機で位置情報設定値を取得し、開始の是非を判断*/
@@ -172,9 +172,17 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
 
     /**位置情報検知を開始*/
     public void startLocationUpdate() {
-        locationManager = new FLPLocationManager(this, this);
-        locationManager.startLocationUpdates();
-        Log.d(LOG_TAG,"locationManager.startLocationUpdates(); Called");
+//        locationManager = new FLPLocationManager(this, this);
+//        locationManager.startLocationUpdates();
+//        Log.d(LOG_TAG,"locationManager.startLocationUpdates(); Called");
+
+        Log.d(LOG_TAG, "位置情報検知サービスの開始");
+        Log.d(LOG_TAG, "LocationIntentService Start");
+        Intent intent = new Intent(mContext, LocationIntentService.class);
+        runOnUiThread(() -> {
+            Log.d(LOG_TAG, "LocationIntentService Start in UiThread");
+            startService(intent);
+        });
     }
 
     /**位置情報検知を停止*/
