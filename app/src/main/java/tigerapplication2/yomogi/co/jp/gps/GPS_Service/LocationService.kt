@@ -64,8 +64,8 @@ class LocationService : Service() , OnLocationResultListener {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(LOG_TAG, "onStartCommand Called")
-        locationManager = FLPLocationManager(this, this)
-        locationManager!!.startLocationUpdates()
+//        locationManager = FLPLocationManager(this, this)
+//        locationManager!!.startLocationUpdates()
 
         val notification = MyNotificationCreater.createForeNotification(this)
         startForeground(2, notification)
