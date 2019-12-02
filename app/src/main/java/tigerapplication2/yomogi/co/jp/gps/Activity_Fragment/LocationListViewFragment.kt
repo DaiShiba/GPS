@@ -52,6 +52,9 @@ class LocationListViewFragment : Fragment() {
         // ListViewをセット
         val adapter = LocationListViewAdapter(this.context!!, items)
         list_view.adapter = adapter
+
+        val header = layoutInflater.inflate(R.layout.headerlayout, null)
+        list_view.addHeaderView(header)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
