@@ -48,6 +48,8 @@ class LocationService : Service() , OnLocationResultListener {
         LocationContent.addItem(locationItem)
         LocationInfoFragment.oreoreNotify()
 
+
+
     }
 
     companion object {

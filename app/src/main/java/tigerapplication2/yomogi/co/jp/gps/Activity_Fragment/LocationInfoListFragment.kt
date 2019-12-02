@@ -13,7 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import tigerapplication2.yomogi.co.jp.gps.Adapter.LocationAdapter
+import tigerapplication2.yomogi.co.jp.gps.Adapter.LocationListViewAdapter
 
 import tigerapplication2.yomogi.co.jp.gps.Contents.LocationContent
 import tigerapplication2.yomogi.co.jp.gps.Contents.LocationContent.LocationItem
@@ -56,7 +56,7 @@ class LocationInfoListFragment : Fragment() {
             view.addItemDecoration(itemDecoration)
 
             //アダプタにリストとリスナーを設定
-            view.adapter = LocationAdapter(locationContent.items, this.mListener)
+//            view.adapter = LocationListViewAdapter(locationContent.items, this.mListener)
         }
         return view
     }

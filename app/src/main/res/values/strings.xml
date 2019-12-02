@@ -25,4 +25,7 @@
     <string name="ticker_text">位置情報取得Ticker</string>
     <string name="channel_name">チャンネル名</string>
     <string name="channel_description">チャンネル詳細</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

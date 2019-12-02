@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import tigerapplication2.yomogi.co.jp.gps.Adapter.LocationListViewAdapter;
 import tigerapplication2.yomogi.co.jp.gps.Contents.LocationContent;
 import tigerapplication2.yomogi.co.jp.gps.Contents.LocationContent.LocationItem;
 import tigerapplication2.yomogi.co.jp.gps.Database.DatabaseHelper;
@@ -32,6 +37,7 @@ public class LocationInfoFragment extends Fragment {
     private static String data_count;
     private static int count;
 
+    private static LocationListViewAdapter listViewAdapter;
     private static RecyclerView.Adapter recycleAdapter;
 
     public LocationInfoFragment() {
@@ -56,10 +62,20 @@ public class LocationInfoFragment extends Fragment {
         }
     }
 
+    boolean typeMock = false;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_locationinfo_list, container, false);
+
+        View view;
+        if (typeMock) {
+
+            // listView の設定
+            view = inflater.inflate(R.layout.fragment_locationinfo_list, container, false);
+        }else {
+            view = inflater.inflate(R.layout.fragment_locationinfo_list, container, false);
+        }
 
         if (view instanceof RecyclerView) {
             //DBより最新履歴をmColumnCount件取得

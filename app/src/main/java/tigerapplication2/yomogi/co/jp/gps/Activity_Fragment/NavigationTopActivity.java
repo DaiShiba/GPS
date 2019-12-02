@@ -269,6 +269,8 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
         }
     }
 
+    boolean typeMock = true;
+
     /**Navigationのアイテム選択時のコールバック*/
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -284,8 +286,12 @@ public class NavigationTopActivity extends AppCompatActivity implements FLPLocat
 
         } else if (id == R.id.nav_list) {
             Log.d(LOG_TAG, "nav_list");
-            nextFragment = LocationInfoFragment.newInstance(LIST_COUNT);
 
+            if (typeMock) {
+                nextFragment = LocationListViewFragment.newInstance("param1","param2");
+            } else {
+                nextFragment = LocationInfoFragment.newInstance(LIST_COUNT);
+            }
         } else if (id == R.id.nav_geofence) {
             Log.d(LOG_TAG, "nav_geofence");
             nextFragment = GeofenceFragment.newInstance();

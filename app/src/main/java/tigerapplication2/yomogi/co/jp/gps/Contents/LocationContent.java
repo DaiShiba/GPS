@@ -17,6 +17,9 @@ public class LocationContent {
     private static List<LocationItem> ITEMS = new ArrayList<LocationItem>();
     private static int id = 1;
 
+    public LocationContent() {
+    }
+
     //Cursorを引数にLocationInfoリストを生成
     public LocationContent(Cursor cursor){
         //最終更新日時用のフォーマッタ
